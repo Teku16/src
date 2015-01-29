@@ -3077,20 +3077,7 @@ struct TireInput {
 };
 
 dclass DistributedIceGame : DistributedMinigame {
-  setForceArrowInfo(uint32, int32/100, int32/100) broadcast clsend;
-  setAvatarChoice(int32/100, int32/100) airecv clsend;
-  endingPositions(Coord3 []) airecv clsend;
-  reportScoringMovieDone() airecv clsend;
-  claimTreasure(uint8) airecv clsend;
-  claimPenalty(uint8) airecv clsend;
-  setTireInputs(TireInput []) broadcast;
-  setTimerStartTime(int16) broadcast;
-  setFinalPositions(Coord3 []) broadcast;
-  setMatchAndRound(int8, int8) broadcast;
-  setScores(int8, int8, int16[]) broadcast;
-  setNewState(string) broadcast;
-  setTreasureGrabbed(uint32, uint32) broadcast;
-  setPenaltyGrabbed(uint32, uint32) broadcast;
+  setSpawnPosition(uint8 posIndex);
 };
 
 dclass DistributedCogThiefGame : DistributedMinigame {
