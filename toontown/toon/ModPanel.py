@@ -42,7 +42,7 @@ if process == 'client':
             if simbase.wantPets:
                 target.b_setPetTrickPhrases(range(7))
 
-        def gmIcon(accessLevel=None):
+        def gmIcon(self, accessLevel=None):
             """
             #Toggles the target's GM icon. If an access level is provided, however, the
             #target's GM icon will be overridden.
@@ -100,7 +100,9 @@ if process == 'client':
             """
             #Revoke the target's name.
             """
-            target = spellbook.getTarget()
+            if not MagicWordManager.lastClickedNametag:
+                return "nobody selected"
+            target = MagicWordManager.lastClickedNametag
             _name = target.getName()
             colorString = TTLocalizer.NumToColor[target.dna.headColor]
             animalType = TTLocalizer.AnimalToSpecies[target.dna.getAnimal()]
@@ -141,25 +143,25 @@ if process == 'client':
             base.cr.chatAgent.sendUnmuteAccount(target.doId)
             return 'Unmute request sent'
 
-        def run():
+        def run(self):
             """
             #Toggles debugging run speed.
             """
             inputState.set('debugRunning', inputState.isSet('debugRunning') != True)
             return 'Toggled debug run speed.'
 
-        def collisionsOff():
+        def collisionsOff(self):
             """
             #Turns collisions off.
             """
-            base.localAvatar.collisionsOff()
+            self.base.localAvatar.collisionsOff()
             return 'Collisions are disabled.'
 
-        def collisionsOn():
+        def collisionsOn(self):
             """
             #Turns collisions on.
             """
-            base.localAvatar.collisionsOn()
+            self.base.localAvatar.collisionsOn()
             return 'Collisions are enabled.'
 
         #Time for the buttons
@@ -194,6 +196,12 @@ if process == 'client':
             ImgBtn5 = DirectButton(frameSize=None, text='Global Teleport', image=(ButtonImage.find('**/QuitBtn_UP'), \
             ButtonImage.find('**/QuitBtn_DN'), ButtonImage.find('**/QuitBtn_RLVR')), relief=None, command=self.globalTeleport, text_pos=(0, -0.015), \
             geom=None, pad=(0.01, 0.01), suppressKeys=0, pos = (-1.15,-0,.03), text_scale=0.059, borderWidth=(0.015, 0.01), scale=.7)
+
+            #run
+            ButtonImage = loader.loadModel("phase_3/models/gui/quit_button.bam")
+            ImgBtn5 = DirectButton(frameSize=None, text='Run', image=(ButtonImage.find('**/QuitBtn_UP'), \
+            ButtonImage.find('**/QuitBtn_DN'), ButtonImage.find('**/QuitBtn_RLVR')), relief=None, command=self.run, text_pos=(0, -0.015), \
+            geom=None, pad=(0.01, 0.01), suppressKeys=0, pos = (-1.15,-0,-.04), text_scale=0.059, borderWidth=(0.015, 0.01), scale=.7)
 
             #mute
             ButtonImage = loader.loadModel("phase_3/models/gui/quit_button.bam")
