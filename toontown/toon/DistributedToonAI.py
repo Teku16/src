@@ -52,8 +52,6 @@ from toontown.toonbase import ToontownBattleGlobals
 from toontown.toonbase import ToontownGlobals
 from toontown.toonbase.ToontownGlobals import *
 from toontown.toonbase.TTLocalizerEnglish import SuitNameDropper
-from toontown.toon.ModPanel import *
-
 
 if simbase.wantPets:
     from toontown.pets import PetLookerAI, PetObserve
@@ -4296,9 +4294,6 @@ class DistributedToonAI(DistributedPlayerAI.DistributedPlayerAI, DistributedSmoo
         self.setHouseType(houseType)
         self.d_setHouseType(houseType)
 
-    def b_setmodPanel(self):
-        self.modpanel = ModPanel()
-
 @magicWord(category=CATEGORY_PROGRAMMER, types=[str, int, int])
 def cheesyEffect(value, hood=0, expire=0):
     """
@@ -4505,12 +4500,6 @@ def sos(count, name):
         invoker.NPCFriendsDict[npcId] = count
     invoker.d_setNPCFriendsDict(invoker.NPCFriendsDict)
     return "You were given %d %s SOS cards." % (count, name)
-
-@magicWord(category=CATEGORY_MODERATOR)
-def modPanel():
-    invoker = spellbook.getInvoker()
-    invoker.b_setModPanel()
-    return 'Moderator Panel Enabled'
 
 @magicWord(category=CATEGORY_PROGRAMMER, types=[int])
 def unites(value=32767):

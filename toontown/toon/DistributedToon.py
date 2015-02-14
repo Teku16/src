@@ -60,6 +60,7 @@ from toontown.suit import SuitDNA
 from toontown.toonbase import TTLocalizer
 from toontown.toonbase import ToontownGlobals
 from otp.ai import MagicWordManager
+from toontown.toon.ModPanel import ModPanel
 
 if base.wantKarts:
     from toontown.racing.KartDNA import *
@@ -2733,3 +2734,9 @@ def unmute():
     print ['unmute', target.doId]
     base.cr.chatAgent.sendUnmuteAccount(target.doId)
     return 'Unmute request sent'
+
+@magicWord(category=CATEGORY_MODERATOR)
+def modPanel():
+    invoker = spellbook.getInvoker()
+    ModPanel(invoker)
+    return 'Moderator Panel Enabled'
