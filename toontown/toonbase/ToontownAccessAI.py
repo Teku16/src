@@ -10,7 +10,7 @@ def canAccess(avatarId, zoneId, function = ''):
             return False
         simbase.air.writeServerEvent('suspicious', avatarId, 'User with rights: %s requesting enter for paid access content without proper rights in zone %s from %s' % (avatar.getGameAccess(), zoneId, function))
         if simbase.config.GetBool('want-ban-ispaid', True):
-            commentStr = 'User with rights: %s tried to gain access zone %s from function %s, an area they were not allowed to using TTInjector Hack' % (avatar.getGameAccess(), zoneId, function)
+            commentStr = 'User with rights: %s tried to gain access zone %s from function %s, an area they were not allowed to using TTFnjector Hack' % (avatar.getGameAccess(), zoneId, function)
             dislId = avatar.DISLid
             #simbase.air.banManager.ban(avatarId, dislId, commentStr)
         return False

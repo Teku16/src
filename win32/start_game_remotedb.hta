@@ -16,8 +16,8 @@
         Dim objShell
         set objShell = CreateObject ( "WScript.Shell" )
         set sysenv = objShell.Environment ( "PROCESS" )
-        sysenv("TTI_PLAYCOOKIE") = username.Value&":"&password.Value
-        sysenv("TTI_GAMESERVER") = "toontownfellowship.com"
+        sysenv("TTF_PLAYCOOKIE") = username.Value&":"&password.Value
+        sysenv("TTF_GAMESERVER") = "toontownfellowship.com"
         objShell.currentDirectory = objShell.currentDirectory&"\.."
         objShell.Run("C:/Panda3D-1.9.0/python/ppython.exe -m toontown.toonbase.ClientStart")
         set objShell = Nothing

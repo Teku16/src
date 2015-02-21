@@ -2,7 +2,7 @@
 from pandac.PandaModules import *
 
 
-hashVal = 2263493646L
+hashVal = 2263205409
 
 
 from toontown.cogdominium import DistributedCogdoInterior, DistributedCogdoBattleBldg, DistributedCogdoElevatorExt, DistributedCogdoElevatorInt, DistributedCogdoBarrel, DistCogdoGame, DistCogdoLevelGame, DistCogdoBoardroomGame, DistCogdoCraneGame, DistCogdoMazeGame, DistCogdoFlyingGame, DistCogdoCrane, DistCogdoCraneMoneyBag, DistCogdoCraneCog
@@ -44,7 +44,7 @@ from toontown.parties import DistributedParty, DistributedPartyActivity, Distrib
 from otp.snapshot import SnapshotDispatcher, SnapshotRenderer
 from toontown.uberdog.DistributedInGameNewsMgr import DistributedInGameNewsMgr
 from toontown.coghq.InGameEditorDCImports import *
-from toontown.friends import TTPlayerFriendsManager, TTIFriendsManager
+from toontown.friends import TTPlayerFriendsManager, TTFFriendsManager
 from otp.status import StatusDatabase
 from toontown.uberdog.DistributedSecurityMgr import DistributedSecurityMgr
 from otp.distributed import Account, ObjectServer, DistributedDistrict, DistributedDirectory, DistributedTestObject, CentralLogger
