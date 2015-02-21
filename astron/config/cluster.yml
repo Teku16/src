@@ -35,7 +35,7 @@ uberdogs:
       id: 4687
       anonymous: false
 
-    - class: TTIFriendsManager
+    - class: TTFFriendsManager
       id: 4666
       anonymous: false
 
