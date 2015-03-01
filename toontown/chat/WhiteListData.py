@@ -30671,6 +30671,7 @@ WHITELIST = [
     'snuze',
     'so',
     'soaker',
+    'soap',
     'soapstone',
     'soar',
     "soarin'",
