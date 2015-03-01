@@ -5089,8 +5089,8 @@ def clothes(value):
         dna.sleeveTex = 86
         dna.sleeveTexColor = 27
         invoker.b_setDNAString(dna.makeNetString())
-        return 'You have selected "Scientist C Outfit"! Swag!'
-    if value = 7:
+        return 'You have selected "Scientist C Outfit"! Swag!' 
+    if value == 7:
 #racing grand prix
         dna = ToonDNA.ToonDNA()
         dna.makeFromNetString(invoker.getDNAString())
@@ -5101,7 +5101,7 @@ def clothes(value):
         dna.sleeveTex = 105
         dna.sleeveTexColor = 27
         invoker.b_setDNAString(dna.makeNetString())
-        return 'You have selected "Racing Grand Prix Outfit"! Swag!'        
+        return 'You have selected "Racing Grand Prix Outfit"! Swag!'
     else:
         return 'Clothes List:\n1=Fishing #1\n2=Trolley\n3=Summer\n4=Scientist A\n5=Scientist B\n6=Scientist C\n'
 
