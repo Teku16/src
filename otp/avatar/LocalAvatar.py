@@ -79,6 +79,7 @@ class LocalAvatar(DistributedAvatar.DistributedAvatar, DistributedSmoothNode.Dis
         self.accept('avatarMoving', self.clearPageUpDown)
         self.showNametag2d()
         self.setPickable(0)
+        self.neverSleep = False
 
     def useSwimControls(self):
         self.controlManager.use('swim', self)
@@ -984,7 +985,15 @@ class LocalAvatar(DistributedAvatar.DistributedAvatar, DistributedSmoothNode.Dis
         self.soundRun.stop()
         self.soundWalk.stop()
 
+    def disableSleeping(self):
+        self.neverSleep = True
+
+    def enableSleeping(self):
+        self.neverSleep = False
+
     def wakeUp(self):
+        if self.neverSleep:
+            return
         if self.sleepCallback != None:
             taskMgr.remove(self.uniqueName('sleepwatch'))
             self.startSleepWatch(self.sleepCallback)
@@ -994,6 +1003,8 @@ class LocalAvatar(DistributedAvatar.DistributedAvatar, DistributedSmoothNode.Dis
         return
 
     def gotoSleep(self):
+        if self.neverSleep:
+            return
         if not self.sleepFlag:
             self.b_setAnimState('Sleep', self.animMultiplier)
             self.sleepFlag = 1
@@ -1273,3 +1284,12 @@ def hpr(h, p, r):
     Modifies the rotation of the invoker.
     """
     base.localAvatar.setHpr(h, p, r)
+
+@magicWord(category=CATEGORY_MODERATOR)
+def keepalive():
+    self = spellbook.getInvoker()
+    now = globalClock.getFrameTime()
+    self.lastMoved = globalClock.getFrameTime()
+    self.sleepTimeout = base.config.GetInt('sleep-timeout', 86400)
+    if now - self.lastMoved > self.sleepTimeout:
+        return "Keepalive is active."
