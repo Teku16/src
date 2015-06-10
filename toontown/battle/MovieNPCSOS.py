@@ -111,7 +111,6 @@ def teleportIn(attack, npc, pos = Point3(0, 0, 0), hpr = Vec3(180.0, 0.0, 0.0)):
         g = ActorInterval(npc, 'wave')
     if npc.getName() == 'Aqua Dog FireSpinner':
         f = Func(npc.setChatAbsolute, 'Yoooo, sup' % attack['toon'].getName() + '? I got this bruh.', CFSpeech | CFTimeout)
-        g = ActorInterval(npc, 'delighted')
     h = Func(npc.loop, 'neutral')
     seq = Sequence(a, b, c, d, e, ee, f, g, h)
     if npc.getName() == 'Trap Cat':
