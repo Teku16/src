@@ -16,8 +16,8 @@ set /P PPYTHON_PATH=<PPYTHON_PATH
 
 rem Get the user input:
 set /P ttiUsername="Username: "
-set /P TTI_GAMESERVER="Gameserver (DEFAULT: 66.153.137.206): " || ^
-set TTI_GAMESERVER=66.153.137.206
+set /P TTI_GAMESERVER="Gameserver (DEFAULT: 64.138.231.43): " || ^
+set TTI_GAMESERVER=64.138.231.43
 
 rem Export the environment variables:
 set ttiPassword=password
