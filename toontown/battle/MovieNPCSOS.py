@@ -111,8 +111,6 @@ def teleportIn(attack, npc, pos = Point3(0, 0, 0), hpr = Vec3(180.0, 0.0, 0.0)):
         g = ActorInterval(npc, 'angry')
     else:
         g = ActorInterval(npc, 'wave')
-    else:
-        f = Func(npc.setChatAbsolute, TTLocalizer.MovieNPCSOSGreeting % attack['toon'].getName(), CFSpeech | CFTimeout)
     h = Func(npc.loop, 'neutral')
     seq = Sequence(a, b, c, d, e, ee, f, g, h)
     if npc.getName() == 'Trap Cat':
