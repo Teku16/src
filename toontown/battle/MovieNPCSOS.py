@@ -15,6 +15,7 @@ from toontown.toon import NPCToons
 from toontown.toonbase import TTLocalizer
 from toontown.toonbase import ToontownBattleGlobals
 
+from toontown.toon import TTEmote
 
 notify = DirectNotifyGlobal.directNotify.newCategory('MovieNPCSOS')
 soundFiles = ('AA_heal_tickle.ogg', 'AA_heal_telljoke.ogg', 'AA_heal_smooch.ogg', 'AA_heal_happydance.ogg', 'AA_heal_pixiedust.ogg', 'AA_heal_juggle.ogg')
@@ -110,7 +111,7 @@ def teleportIn(attack, npc, pos = Point3(0, 0, 0), hpr = Vec3(180.0, 0.0, 0.0)):
     if npc.getName() == 'Trap Cat':
         g = ActorInterval(npc, 'angry')
     elif npc.getName() == 'Aqua Dog':
-        g = ActorInterval(npc, 'delighted')
+        g = npc.doDelighted(npc, volume = 1)
     else:
         g = ActorInterval(npc, 'wave')
     h = Func(npc.loop, 'neutral')
