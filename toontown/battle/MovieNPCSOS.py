@@ -103,14 +103,14 @@ def teleportIn(attack, npc, pos = Point3(0, 0, 0), hpr = Vec3(180.0, 0.0, 0.0)):
     ee = Func(npc.addActive)
     if npc.getName() == 'Trap Cat':
         f = Func(npc.setChatAbsolute, 'We are team trap! Fear me %s' % attack['toon'].getName() + ' for I am the Notorious T-Cat', CFSpeech | CFTimeout)
+    elif npc.getName() == 'Aqua Dog':
+        f = Func(npc.setChatAbsolute, 'Yoooo, sup %s' % attack['toon'].getName() + '? I got this bruh.', CFSpeech | CFTimeout)
     else:
         f = Func(npc.setChatAbsolute, TTLocalizer.MovieNPCSOSGreeting % attack['toon'].getName(), CFSpeech | CFTimeout)
     if npc.getName() == 'Trap Cat':
         g = ActorInterval(npc, 'angry')
     else:
         g = ActorInterval(npc, 'wave')
-    if npc.getName() == 'Aqua Dog':
-        f = Func(npc.setChatAbsolute, 'Yoooo, sup %s' % attack['toon'].getName() + '? I got this bruh.', CFSpeech | CFTimeout)
     else:
         f = Func(npc.setChatAbsolute, TTLocalizer.MovieNPCSOSGreeting % attack['toon'].getName(), CFSpeech | CFTimeout)
     h = Func(npc.loop, 'neutral')
