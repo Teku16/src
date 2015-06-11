@@ -5181,6 +5181,7 @@ def track(command, track, value=None):
         return 'Set the experience of the %s track to: %d!' % (track, value)
     return 'Invalid command.'
 
+#suit invasion
 @magicWord(category=CATEGORY_ADMINISTRATOR, types=[str, str])
 def suit(command, suitName):
     invoker = spellbook.getInvoker()
@@ -5198,8 +5199,16 @@ def suit(command, suitName):
         if returnCode[0] == 'success':
             return 'Successfully spawned a Cog building with: ' + suitFullName
         return "Couldn't spawn a Cog building with: " + suitFullName
+    elif command == 'invasion':
+        suitIndex = SuitDNA.suitHeadTypes.index(suitName)
+        suitDeptIndex = suitIndex / SuitDNA.suitsPerDept
+        suitTypeIndex = suitIndex % SuitDNA.suitsPerDept
+        returnCode = invoker.doCogInvasion(suitDeptIndex, suitTypeIndex)
+        if returnCode[0] == 'success':
+            return 'Successfully summoned a Cog invasion with: ' + suitFullName
+        return "Couldn't spawn a Cog invasion with: " + suitFullName
     else:
-        return 'Invalid command.'
+        return 'Invalid sub-command of "suit".'
 
 @magicWord(category=CATEGORY_PROGRAMMER, types=[str, int])
 def achievements(command, achId):
