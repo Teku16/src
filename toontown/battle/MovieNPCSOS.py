@@ -104,11 +104,13 @@ def teleportIn(attack, npc, pos = Point3(0, 0, 0), hpr = Vec3(180.0, 0.0, 0.0)):
     if npc.getName() == 'Trap Cat':
         f = Func(npc.setChatAbsolute, 'We are team trap! Fear me %s' % attack['toon'].getName() + ' for I am the Notorious T-Cat', CFSpeech | CFTimeout)
     elif npc.getName() == 'Aqua Dog':
-        f = Func(npc.setChatAbsolute, 'Yoooo, sup %s' % attack['toon'].getName() + '? I got this bruh.', CFSpeech | CFTimeout)
+        f = Func(npc.setChatAbsolute, 'Yoooo, sup %s' % attack['toon'].getName() + '? I got this guys, dont worry.', CFSpeech | CFTimeout)
     else:
         f = Func(npc.setChatAbsolute, TTLocalizer.MovieNPCSOSGreeting % attack['toon'].getName(), CFSpeech | CFTimeout)
     if npc.getName() == 'Trap Cat':
         g = ActorInterval(npc, 'angry')
+    elif npc.getName() == 'Aqua Dog':
+        g = ActorInterval(npc, 'delighted')
     else:
         g = ActorInterval(npc, 'wave')
     h = Func(npc.loop, 'neutral')
@@ -134,6 +136,8 @@ def teleportOut(attack, npc):
             a = ActorInterval(npc, 'curtsy')
     if npc.getName() == 'Trap Cat':
         b = Func(npc.setChatAbsolute, 'Drat, my hacks failed... Oh well, I will just disconnect you all!', CFSpeech | CFTimeout)
+    elif npc.getName() == 'Aqua Dog':
+        b = Func(npc.setChatAbsolute, 'Told you I got this. Stay swaggy.', CFSpeech | CFTimeout)
     else:
         b = Func(npc.setChatAbsolute, TTLocalizer.MovieNPCSOSGoodbye, CFSpeech | CFTimeout)
     if npc.getName() == 'Trap Cat':
