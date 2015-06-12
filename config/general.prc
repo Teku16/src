@@ -17,6 +17,9 @@ model-cache-models #f
 model-cache-textures #f
 default-model-extension .bam
 
+# Chat:
+want-whitelist #f
+
 # Textures:
 texture-anisotropic-degree 16
 
