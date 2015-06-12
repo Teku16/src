@@ -3142,7 +3142,7 @@ class DistributedToonAI(DistributedPlayerAI.DistributedPlayerAI, DistributedSmoo
          building.block,
          self.zoneId))
         return ['success', suitIndex, building.doId]
-
+        
     def doCogdoTakeOver(self, difficulty, buildingHeight):
         streetId = ZoneUtil.getBranchZone(self.zoneId)
         if streetId not in self.air.suitPlanners:
@@ -5207,9 +5207,27 @@ def suit(command, suitName):
         if returnCode[0] == 'success':
             return 'Successfully summoned a Cog invasion with: ' + suitFullName
         return "Couldn't spawn a Cog invasion with: " + suitFullName
+    elif command == 'stopinv':
+        if self.air.suitInvasionManager.getInvading() == True:
+            self.air.suitInvasionManager.stopInvasion()
+        if returnCode[0] == 'success':
+            return 'Successfully stopped the Cog invasion! Hooray!'
+        return 'Could not stop the Cog invasion! D:'
     else:
-        return 'Invalid sub-command of "suit".'
+        return 'Invalid sub-command of "suit". The possible commands are "invasion", "stopinv", "building", and "spawn".'
 
+#@magicWord(category=CATEGORY_PROGRAMMER, types=[int, int])
+    def cogDo(difficulty, buildingHeight):
+        streetId = ZoneUtil.getBranchZone(self.zoneId)
+        if streetId not in self.air.suitPlanners:
+            self.notify.warning('Street %d is not known.' % streetId)
+            return 'Failure: street is not a known street.'
+        building = self.findClosestDoor()
+        if building is None:
+            return 'Failure: no possible buildings in range. Please move.' 
+        building.cogdoTakeOver(difficulty, buildingHeight)
+        return 'Success! Summoned a CogDo building!'
+        
 @magicWord(category=CATEGORY_PROGRAMMER, types=[str, int])
 def achievements(command, achId):
     invoker = spellbook.getInvoker()
