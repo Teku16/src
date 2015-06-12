@@ -108,8 +108,8 @@ def teleportIn(attack, npc, pos = Point3(0, 0, 0), hpr = Vec3(180.0, 0.0, 0.0)):
         f = Func(npc.setChatAbsolute, 'Yoooo, sup %s' % attack['toon'].getName() + '? I got this guys, dont worry.', CFSpeech | CFTimeout)
     elif npc.getName() == 'Cutie Britt':
         f = Func(npc.setChatAbsolute, 'Hello children, tiME fOr DeAtH', CFSpeech | CFTimeout)
-    #elif npc.getName() == 'Uber Toon':
-    #    Func(npc.setChatAbsolute, "How you doin' %s" + % attack['toon'].getName() + " ;) I got this guys! Because Ken is better than Brit!", CFSpeech | CFTimeout)
+    elif npc.getName() == 'Uber Toon':
+        f = Func(npc.setChatAbsolute, "How you doin' %s" % attack['toon'].getName() + " ;) I got this guys! Because Ken is better than Brit!", CFSpeech | CFTimeout)
     else:
         f = Func(npc.setChatAbsolute, TTLocalizer.MovieNPCSOSGreeting % attack['toon'].getName(), CFSpeech | CFTimeout)
     if npc.getName() == 'Trap Cat':
@@ -134,7 +134,7 @@ def teleportIn(attack, npc, pos = Point3(0, 0, 0), hpr = Vec3(180.0, 0.0, 0.0)):
         seq.append(magicCatTrack)
     elif npc.getName() == 'Uber Toon':
         uberToonTrack = Sequence()
-        uberToonTrack.append(Func(npc.setChatAbsolute, "How you doin' %s" % attack['toon'].getName() + " ;) I got this guys! Because Ken is better than Brit!", CFSpeech | CFTimeout))
+        #uberToonTrack.append(Func(npc.setChatAbsolute, "How you doin' %s" % attack['toon'].getName() + " ;) I got this guys! Because Ken is better than Brit!", CFSpeech | CFTimeout))
         uberToonTrack.append(Func(attack['toon'].loop, 'conked'))
         seq.append(uberToonTrack)
     return seq
@@ -154,6 +154,8 @@ def teleportOut(attack, npc):
         b = Func(npc.setChatAbsolute, 'Told you I got this. Stay swaggy.', CFSpeech | CFTimeout)
     elif npc.getName() == 'Cutie Britt':
         b = Func(npc.setChatAbsolute, 'jk Im a sarcastic jerk lelele get rekt nub', CFSpeech | CFTimeout)
+    elif npc.getName() == 'Uber Toon':
+        b = Func(npc.setChatAbsolute, 'Ken is love, Ken is life, see ya!', CFSpeech | CFTimeout)
     else:
         b = Func(npc.setChatAbsolute, TTLocalizer.MovieNPCSOSGoodbye, CFSpeech | CFTimeout)
     if npc.getName() == 'Trap Cat':
