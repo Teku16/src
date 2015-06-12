@@ -5208,8 +5208,8 @@ def suit(command, suitName):
             return 'Successfully summoned a Cog invasion with: ' + suitFullName
         return "Couldn't spawn a Cog invasion with: " + suitFullName
     elif command == 'stopinv':
-        if self.air.suitInvasionManager.getInvading() == True:
-            self.air.suitInvasionManager.stopInvasion()
+        if suitInvasionManager.getInvading() == True:
+            suitInvasionManager.stopInvasion()
         if returnCode[0] == 'success':
             return 'Successfully stopped the Cog invasion! Hooray!'
         return 'Could not stop the Cog invasion! D:'
