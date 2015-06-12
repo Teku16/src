@@ -18,7 +18,12 @@ rem Get the user input:
 set /P ttiUsername="Username: "
 set /P TTI_GAMESERVER="Gameserver (DEFAULT: 64.138.231.43): " || ^
 set TTI_GAMESERVER=64.138.231.43
-
+goto launch
+:replay
+echo.Please press enter to launch the game again!
+pause>nul
+goto launch
+:launch
 rem Export the environment variables:
 set ttiPassword=password
 set TTI_PLAYCOOKIE=%ttiUsername%
@@ -31,4 +36,7 @@ echo Gameserver: %TTI_GAMESERVER%
 echo ===============================
 
 %PPYTHON_PATH% -m toontown.toonbase.ClientStart
-pause
+echo.Thank you for playing Toontown: The Edge! Press enter to login again! (without entering your username and IP again)
+pause>nul
+cls
+goto replay

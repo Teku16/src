@@ -5183,7 +5183,7 @@ def track(command, track, value=None):
 
 #suit invasion
 @magicWord(category=CATEGORY_ADMINISTRATOR, types=[str, str])
-def suit(command, suitName):
+def suit(self, command, suitName):
     invoker = spellbook.getInvoker()
     command = command.lower()
     if suitName not in SuitDNA.suitHeadTypes:
@@ -5208,8 +5208,8 @@ def suit(command, suitName):
             return 'Successfully summoned a Cog invasion with: ' + suitFullName
         return "Couldn't spawn a Cog invasion with: " + suitFullName
     elif command == 'stopinv':
-        if suitInvasionManager.getInvading() == True:
-            suitInvasionManager.stopInvasion()
+        if self.air.suitInvasionManager.getInvading() == True:
+            self.air.suitInvasionManager.stopInvasion()
         if returnCode[0] == 'success':
             return 'Successfully stopped the Cog invasion! Hooray!'
         return 'Could not stop the Cog invasion! D:'
