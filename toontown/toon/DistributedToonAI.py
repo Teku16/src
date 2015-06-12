@@ -52,7 +52,7 @@ from toontown.toonbase import ToontownBattleGlobals
 from toontown.toonbase import ToontownGlobals
 from toontown.toonbase.ToontownGlobals import *
 from toontown.toonbase.TTLocalizerEnglish import SuitNameDropper
-from toontown.suit import SuitInvasionManagerAi
+from toontown.suit import SuitInvasionManagerAI
 
 
 if simbase.wantPets:
