@@ -134,8 +134,8 @@ def teleportIn(attack, npc, pos = Point3(0, 0, 0), hpr = Vec3(180.0, 0.0, 0.0)):
         seq.append(magicCatTrack)
     elif npc.getName() == 'Uber Toon':
         uberToonTrack = Sequence()
-        uberToonTrack.append(Func(npc.setChatAbsolute, "How you doin' %s" + % attack['toon'].getName() + " ;) I got this guys! Because Ken is better than Brit!", CFSpeech | CFTimeout))
-        uberToonTrack.append(Func(attack['toon'].doSurprise(toon, volume = 1)))
+        uberToonTrack.append(Func(npc.setChatAbsolute, "How you doin' %s" % attack['toon'].getName() + " ;) I got this guys! Because Ken is better than Brit!", CFSpeech | CFTimeout))
+        uberToonTrack.append(Func(attack['toon'].loop, 'conked'))
         seq.append(uberToonTrack)
     return seq
 

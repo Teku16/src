@@ -36,7 +36,8 @@ echo Gameserver: %TTI_GAMESERVER%
 echo ===============================
 
 %PPYTHON_PATH% -m toontown.toonbase.ClientStart
-cls
+echo.
+echo.
 echo.Thank you for playing Toontown: The Edge! Press enter to login again! (without entering your username and IP again)
 pause>nul
 cls
