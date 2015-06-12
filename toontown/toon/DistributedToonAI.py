@@ -52,6 +52,7 @@ from toontown.toonbase import ToontownBattleGlobals
 from toontown.toonbase import ToontownGlobals
 from toontown.toonbase.ToontownGlobals import *
 from toontown.toonbase.TTLocalizerEnglish import SuitNameDropper
+from toontown.suit import SuitInvasionManagerAi
 
 
 if simbase.wantPets:
@@ -5183,7 +5184,7 @@ def track(command, track, value=None):
 
 #suit invasion
 @magicWord(category=CATEGORY_ADMINISTRATOR, types=[str, str])
-def suit(self, command, suitName):
+def suit(command, suitName):
     invoker = spellbook.getInvoker()
     command = command.lower()
     if suitName not in SuitDNA.suitHeadTypes:
@@ -5208,8 +5209,8 @@ def suit(self, command, suitName):
             return 'Successfully summoned a Cog invasion with: ' + suitFullName
         return "Couldn't spawn a Cog invasion with: " + suitFullName
     elif command == 'stopinv':
-        if self.air.suitInvasionManager.getInvading() == True:
-            self.air.suitInvasionManager.stopInvasion()
+        if suitInvasionManager.getInvading() == True:
+            suitInvasionManager.stopInvasion()
         if returnCode[0] == 'success':
             return 'Successfully stopped the Cog invasion! Hooray!'
         return 'Could not stop the Cog invasion! D:'
