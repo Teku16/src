@@ -5105,6 +5105,21 @@ def clothes(value):
         return 'You have selected "Racing Grand Prix Outfit"! Swag!'
     else:
         return 'Clothes List:\n1=Fishing #1\n2=Trolley\n3=Summer\n4=Scientist A\n5=Scientist B\n6=Scientist C\n'
+        
+        
+@magicWord(category=CATEGORY_ADMINISTRATOR, types=[])
+def golfCart():
+    """
+    Hopefully adds a golfcart to your toon to race around in.
+    """
+    invoker = spellbook.getInvoker()
+    pos = invoker.getPos()
+    kart = loader.loadModel('phase_12/models/bossbotHQ/Coggolf_cart3.bam')
+    #kart.reparentTo(feet2)
+    #bike.setHpr(0,90,0)
+    kart.setPos(pos)
+    kart.setScale(.75)
+    kart.reparentTo(kart)
 
 
 @magicWord(category=CATEGORY_ADMINISTRATOR, types=[int])
