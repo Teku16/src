@@ -4997,6 +4997,184 @@ def dna(part, value):
 
     return 'Invalid part: ' + part
 
+@magicWord(category=CATEGORY_CREATIVE, types=[str, str])
+def qdna(part, value):
+    """Modify a DNA part on the invoker SILENTLY - Aqua Dog FireSpinner."""
+    invoker = spellbook.getInvoker()
+
+    dna = ToonDNA.ToonDNA()
+    dna.makeFromNetString(invoker.getDNAString())
+
+    part = part.lower()
+    if part.endswith('color') or part.endswith('tex') or part.endswith('size'):
+        value = int(value)
+
+    if part == 'gender':
+        if value not in ('m', 'f', 'male', 'female'):
+            return 'Invalid gender: ' + value
+        dna.gender = value[0]
+        invoker.b_setDNAString(dna.makeNetString())
+
+    if part in ('head', 'species'):
+        speciesNames = (
+            'dog', 'cat', 'horse', 'mouse', 'rabbit', 'duck', 'monkey', 'bear',
+            'pig'
+        )
+        if value in speciesNames:
+            speciesIndex = speciesNames.index(value)
+            value = ToonDNA.toonSpeciesTypes[speciesIndex]
+        if value not in ToonDNA.toonSpeciesTypes:
+            return 'Invalid species: ' + value
+        if (dna.headColor == 0x1a) and (value == 'c'):
+            return 'Invalid species for color: black'
+        if (dna.headColor == 0x00) and (value == 'b'):
+            return 'Invalid species for color: white'
+        dna.head = value + dna.head[1:3]
+        invoker.b_setDNAString(dna.makeNetString())
+
+    if part == 'headsize':
+        sizes = ('ls', 'ss', 'sl', 'll')
+        if not 0 <= value <= len(sizes):
+            return 'Invalid head size index: ' + str(value)
+        dna.head = dna.head[0] + sizes[value]
+        invoker.b_setDNAString(dna.makeNetString())
+
+    if part == 'torso':
+        if dna.gender not in ('m', 'f'):
+            return 'Unknown gender.'
+        value = int(value)
+        if (dna.gender == 'm') and (not 0 <= value <= 2):
+            return 'Male torso index out of range (0-2).'
+        if (dna.gender == 'f') and (not 3 <= value <= 8):
+            return 'Female torso index out of range (3-8).'
+        dna.torso = ToonDNA.toonTorsoTypes[value]
+        invoker.b_setDNAString(dna.makeNetString())
+
+    if part == 'legs':
+        value = int(value)
+        if not 0 <= value <= len(ToonDNA.toonLegTypes):
+            return 'Legs index out of range (0-%d).' % len(ToonDNA.toonLegTypes)
+        dna.legs = ToonDNA.toonLegTypes[value]
+        invoker.b_setDNAString(dna.makeNetString())
+
+    if part == 'headcolor':
+        if dna.gender not in ('m', 'f'):
+            return 'Unknown gender.'
+        if (value == 0x1a) or (0x1a in (dna.headColor, dna.armColor, dna.legColor)):
+            return 'Toon contains black parts!'
+        if (value == 0x00) or (0x00 in (dna.headColor, dna.armColor, dna.legColor)):
+            return 'Toon contains white parts!'
+        if (dna.gender == 'm') and (value not in ToonDNA.defaultBoyColorList):
+            return 'Invalid male head color index: ' + str(value)
+        if (dna.gender == 'f') and (value not in ToonDNA.defaultGirlColorList):
+            return 'Invalid female head color index: ' + str(value)
+        dna.headColor = value
+        invoker.b_setDNAString(dna.makeNetString())
+
+    if part == 'armcolor':
+        if dna.gender not in ('m', 'f'):
+            return 'Unknown gender.'
+        if (value == 0x1a) or (0x1a in (dna.headColor, dna.armColor, dna.legColor)):
+            return 'Toon contains black parts!'
+        if (value == 0x00) or (0x00 in (dna.headColor, dna.armColor, dna.legColor)):
+            return 'Toon contains white parts!'
+        if (dna.gender == 'm') and (value not in ToonDNA.defaultBoyColorList):
+            return 'Invalid male arm color index: ' + str(value)
+        if (dna.gender == 'f') and (value not in ToonDNA.defaultGirlColorList):
+            return 'Invalid female arm color index: ' + str(value)
+        dna.armColor = value
+        invoker.b_setDNAString(dna.makeNetString())
+
+    if part == 'legcolor':
+        if dna.gender not in ('m', 'f'):
+            return 'Unknown gender.'
+        if (value == 0x1a) or (0x1a in (dna.headColor, dna.armColor, dna.legColor)):
+            return 'Toon contains black parts!'
+        if (value == 0x00) or (0x00 in (dna.headColor, dna.armColor, dna.legColor)):
+            return 'Toon contains white parts!'
+        if (dna.gender == 'm') and (value not in ToonDNA.defaultBoyColorList):
+            return 'Invalid male leg color index: ' + str(value)
+        if (dna.gender == 'f') and (value not in ToonDNA.defaultGirlColorList):
+            return 'Invalid female leg color index: ' + str(value)
+        dna.legColor = value
+        invoker.b_setDNAString(dna.makeNetString())
+
+    if part == 'color':
+        if dna.gender not in ('m', 'f'):
+            return 'Unknown gender.'
+        if (dna.gender == 'm') and (value not in ToonDNA.defaultBoyColorList):
+            if (value != 0x1a) and (value != 0x00):
+                return 'Invalid male color index: ' + str(value)
+        if (dna.gender == 'f') and (value not in ToonDNA.defaultGirlColorList):
+            if (value != 0x1a) and (value != 0x00):
+                return 'Invalid female color index: ' + str(value)
+        if (value == 0x1a) and (dna.getAnimal() != 'cat'):
+            return 'Invalid color index for species: ' + dna.getAnimal()
+        if (value == 0x00) and (dna.getAnimal() != 'bear'):
+            return 'Invalid color index for species: ' + dna.getAnimal()
+        dna.headColor = value
+        dna.armColor = value
+        dna.legColor = value
+        invoker.b_setDNAString(dna.makeNetString())
+
+    if part == 'gloves':
+        value = int(value)
+        dna.gloveColor = value
+        invoker.b_setDNAString(dna.makeNetString())
+
+    if part == 'toptex':
+        if not 0 <= value <= len(ToonDNA.Shirts):
+            return 'Top texture index out of range (0-%d).' % len(ToonDNA.Shirts)
+        dna.topTex = value
+        invoker.b_setDNAString(dna.makeNetString())
+
+    if part == 'toptexcolor':
+        if not 0 <= value <= len(ToonDNA.ClothesColors):
+            return 'Top texture color index out of range(0-%d).' % len(ToonDNA.ClothesColors)
+        dna.topTexColor = value
+        invoker.b_setDNAString(dna.makeNetString())
+
+    if part == 'sleevetex':
+        if not 0 <= value <= len(ToonDNA.Sleeves):
+            return 'Sleeve texture index out of range(0-%d).' % len(ToonDNA.Sleeves)
+        dna.sleeveTex = value
+        invoker.b_setDNAString(dna.makeNetString())
+
+    if part == 'sleevetexcolor':
+        if not 0 <= value <= len(ToonDNA.ClothesColors):
+            return 'Sleeve texture color index out of range(0-%d).' % len(ToonDNA.ClothesColors)
+        dna.sleeveTexColor = value
+        invoker.b_setDNAString(dna.makeNetString())
+
+    if part == 'bottex':
+        if dna.gender not in ('m', 'f'):
+            return 'Unknown gender.'
+        if dna.gender == 'm':
+            bottoms = ToonDNA.BoyShorts
+        else:
+            bottoms = ToonDNA.GirlBottoms
+        if not 0 <= value <= len(bottoms):
+            return 'Bottom texture index out of range (0-%d).' % len(bottoms)
+        dna.botTex = value
+        invoker.b_setDNAString(dna.makeNetString())
+
+    if part == 'bottexcolor':
+        if not 0 <= value <= len(ToonDNA.ClothesColors):
+            return 'Bottom texture color index out of range(0-%d).' % len(ToonDNA.ClothesColors)
+        dna.botTexColor = value
+        invoker.b_setDNAString(dna.makeNetString())
+
+    if part == 'save':
+        backup = simbase.backups.load('toon', (invoker.doId,), default={})
+        backup.setdefault('dna', {})[value] = invoker.getDNAString()
+        simbase.backups.save('toon', (invoker.doId,), backup)
+
+    if part == 'restore':
+        backup = simbase.backups.load('toon', (invoker.doId,), default={})
+        if value not in backup.get('dna', {}):
+            return "Couldn't find a DNA backup for %s under the name: %s" % (invoker.getName(), value)
+        invoker.b_setDNAString(backup['dna'][value])
+
 
 @magicWord(category=CATEGORY_CREATIVE, types=[int])
 def getSwag():
