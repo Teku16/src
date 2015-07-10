@@ -201,16 +201,21 @@ class ToonAvatarDetailPanel(DirectFrame):
         
         
     def _addToonModel(self):
-        toon = Toon.Toon()
-        toon.setDNA(self.avatar.style)
-        toon.reparentTo(self)
-        toon.setPos(0.45, 0, 0.255)
-        toon.setH(180)
-        toon.setScale(0.11)
-        toon.loop('neutral')
-        toon.setDepthWrite(True)
-        toon.setDepthTest(True)
-        LerpHprInterval(toon, 10, (-180, 0, 0), (180,0,0)).loop()
+        if self.avatar.style:
+            toon = Toon.Toon()
+            print(self.avatar.style)
+            toon.setDNA(self.avatar.style)
+            toon.reparentTo(self)
+            toon.setPos(0.45, 0, 0.255)
+            toon.setH(180)
+            toon.setScale(0.11)
+            toon.loop('neutral')
+            toon.setDepthWrite(True)
+            toon.setDepthTest(True)
+            print(self.avatar.style)
+            LerpHprInterval(toon, 10, (-180, 0, 0), (180,0,0)).loop()
+        else:
+            pass
         
 
     def __updateLaffInfo(self):
