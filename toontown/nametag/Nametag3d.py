@@ -7,12 +7,12 @@ from toontown.chat.ChatBalloon import ChatBalloon
 from toontown.nametag import NametagGlobals
 from toontown.nametag.Nametag import Nametag
 from toontown.toontowngui.Clickable3d import Clickable3d
-
+from direct.interval.IntervalGlobal import *
 
 class Nametag3d(Nametag, Clickable3d):
     SCALING_MIN_DISTANCE = 1
-    SCALING_MAX_DISTANCE = 200
-    SCALING_FACTOR = 0.095
+    SCALING_MAX_DISTANCE = 50
+    SCALING_FACTOR = 0.065
 
     def __init__(self):
         Nametag.__init__(self)
@@ -141,6 +141,8 @@ class Nametag3d(Nametag, Clickable3d):
             reversed=self.chatReversed,
             button=self.chatButton[self.clickState])
         self.chatBalloon.reparentTo(self.contents)
+        self.chatBalloon.setScale(0)
+        LerpScaleInterval(self.chatBalloon, .2, 1, 0).start()
 
     def drawNametag(self):
         if self.font is None:

@@ -11,15 +11,15 @@ def __inject_wx(_):
  
 def openInjector_wx():
     app = wx.App(redirect=False)
-    frame = wx.Frame(None, title="Toontown:The Edge Injector", size=(640, 400), style=wx.SYSTEM_MENU | wx.CAPTION | wx.CLOSE_BOX | wx.MINIMIZE_BOX)
+    frame = wx.Frame(None, title="Toontown:The Edge Injector", size=(640, 430), style=wx.SYSTEM_MENU | wx.CAPTION | wx.CLOSE_BOX | wx.MINIMIZE_BOX)
     panel = wx.Panel(frame)
-    button = wx.Button(parent=panel, id=-1, label="Inject", size=(50, 20), pos=(295, 0))
+    button = wx.Button(parent=panel, id=-1, label="Inject", size=(300, 20), pos=(170, 0))
     global textbox
     textbox = wx.TextCtrl(parent=panel, id=-1, pos=(20, 22), size=(600, 340), style=wx.TE_MULTILINE)
     frame.Bind(wx.EVT_BUTTON, __inject_wx, button)
     frame.Show()
     app.SetTopWindow(frame)
-    defaultText = 'Enter hax here.'
+    defaultText = 'Enter your code here.'
     textbox.AppendText(defaultText)
     threading.Thread(target=app.MainLoop).start()
 

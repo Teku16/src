@@ -83,6 +83,7 @@ class ToonAvatarDetailPanel(DirectFrame):
         self.fsm.request('begin')
         buttons.removeNode()
         gui.removeNode()
+        base.cr.lol = self
         return
 
     def cleanup(self):
