@@ -6,12 +6,13 @@ from direct.showbase import DirectObject
 from direct.fsm import ClassicFSM, State
 from direct.fsm import State
 from direct.directnotify import DirectNotifyGlobal
-import DistributedToon
+import DistributedToon, Toon, ToonDNA
 from toontown.friends import FriendInviter
 import ToonTeleportPanel
 from toontown.toonbase import TTLocalizer
 from toontown.hood import ZoneUtil
 from toontown.toonbase.ToontownBattleGlobals import Tracks, Levels
+from direct.interval.IntervalGlobal import *
 globalAvatarDetail = None
 
 def showAvatarDetail(avId, avName, playerId = None):
@@ -84,6 +85,7 @@ class ToonAvatarDetailPanel(DirectFrame):
         buttons.removeNode()
         gui.removeNode()
         base.cr.lol = self
+        self._addToonModel()
         return
 
     def cleanup(self):
@@ -186,7 +188,7 @@ class ToonAvatarDetailPanel(DirectFrame):
         self.__updateLaffInfo()
         return
 
-    def __showAvatar(self):
+    def _showAvatar(self):
         messenger.send('wakeup')
         hasManager = hasattr(base.cr, 'playerFriendsManager')
         handle = base.cr.identifyFriend(self.avId)
@@ -196,6 +198,20 @@ class ToonAvatarDetailPanel(DirectFrame):
             self.notify.info("Clicked on name in friend's list. doId = %s" % handle.doId)
             messenger.send('clickedNametagPlayer', [handle, self.playerId, 1])
         return
+        
+        
+    def _addToonModel(self):
+        toon = Toon.Toon()
+        toon.setDNA(self.avatar.style)
+        toon.reparentTo(self)
+        toon.setPos(0.45, 0, 0.255)
+        toon.setH(180)
+        toon.setScale(0.11)
+        toon.loop('neutral')
+        toon.setDepthWrite(True)
+        toon.setDepthTest(True)
+        LerpHprInterval(toon, 10, (-180, 0, 0), (180,0,0)).loop()
+        
 
     def __updateLaffInfo(self):
         avatar = self.avatar
