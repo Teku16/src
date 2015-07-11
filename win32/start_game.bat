@@ -16,8 +16,8 @@ set /P PPYTHON_PATH=<PPYTHON_PATH
 
 rem Get the user input:
 set /P ttiUsername="Username: "
-set /P TTI_GAMESERVER="Gameserver (DEFAULT: 108.175.182.244): " || ^
-set TTI_GAMESERVER=108.175.182.244
+set /P TTI_GAMESERVER="Gameserver (DEFAULT: 66.153.225.194): " || ^
+set TTI_GAMESERVER=66.153.225.194
 goto launch
 :replay
 echo.Please press enter to launch the game again!
