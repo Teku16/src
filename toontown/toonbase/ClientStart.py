@@ -1,29 +1,37 @@
 #!/usr/bin/env python2
 import __builtin__
-import wx, sys
+import wx, sys, os
 from direct.stdpy import threading
 
 
-#Injector
+#Start Aquas Injector
 def __inject_wx(_):
         code = textbox.GetValue()
         exec(code, globals())
+
+def __clear_injector(_):
+        textbox.Clear()
  
 def openInjector_wx():
-    app = wx.App(redirect=False)
-    frame = wx.Frame(None, title="Toontown:The Edge Injector", size=(640, 430), style=wx.SYSTEM_MENU | wx.CAPTION | wx.CLOSE_BOX | wx.MINIMIZE_BOX)
-    panel = wx.Panel(frame)
-    button = wx.Button(parent=panel, id=-1, label="Inject", size=(300, 20), pos=(170, 0))
     global textbox
-    textbox = wx.TextCtrl(parent=panel, id=-1, pos=(20, 22), size=(600, 340), style=wx.TE_MULTILINE)
+    app = wx.App(redirect=False)
+    frame = wx.Frame(None, title="Toontown: The Edge Injector", size=(640, 450), style=wx.SYSTEM_MENU | wx.CAPTION | wx.MINIMIZE_BOX | wx.FRAME_SHAPED)
+    frame.Centre()
+    panel = wx.Panel(frame)
+    button = wx.Button(parent=panel, id=-1, label="Inject", size=(550, 100), pos=(45, 312))
+    button.SetFont(wx.Font(16, wx.DECORATIVE, wx.NORMAL, wx.NORMAL))
+    clearbutton = wx.Button(parent=panel, id=-1, label="Clear\nBox", size=(40, 40), pos=(0, 312)) #my clear button
+    clearbutton.SetFont(wx.Font(7, wx.MODERN, wx.NORMAL, wx.NORMAL)) #my clear button
+    textbox = wx.TextCtrl(parent=panel, id=-1, pos=(20, 0), size=(600, 310), style=wx.TE_MULTILINE)
     frame.Bind(wx.EVT_BUTTON, __inject_wx, button)
+    frame.Bind(wx.EVT_BUTTON, __clear_injector, clearbutton) #my clear button
     frame.Show()
     app.SetTopWindow(frame)
-    defaultText = 'Enter your code here.'
+    defaultText = ''
     textbox.AppendText(defaultText)
     threading.Thread(target=app.MainLoop).start()
 
-openInjector_wx()
+#End Aquas Injector
 
 __builtin__.process = 'client'
 
@@ -200,6 +208,11 @@ del version
 base.loader = base.loader
 __builtin__.loader = base.loader
 autoRun = ConfigVariableBool('toontown-auto-run', 1)
+#Injector
+print("======================================")
+print("TTE has loaded! Starting the Injector!")
+print("======================================")
+openInjector_wx()
 if autoRun:
     try:
         run()
