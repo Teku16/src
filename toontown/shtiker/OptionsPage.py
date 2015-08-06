@@ -301,6 +301,7 @@ class OptionsTabPage(DirectFrame):
         self.exitButton = DirectButton(parent=self, relief=None, image=(guiButton.find('**/QuitBtn_UP'), guiButton.find('**/QuitBtn_DN'), guiButton.find('**/QuitBtn_RLVR')), image_scale=1.15, text=TTLocalizer.OptionsPageExitToontown, text_scale=options_text_scale, text_pos=button_textpos, textMayChange=0, pos=(0.45, 0, -0.6), command=self.__handleExitShowWithConfirm)
         guiButton.removeNode()
         gui.removeNode()
+        base.cr.xd = self
 
     def enter(self):
         self.show()

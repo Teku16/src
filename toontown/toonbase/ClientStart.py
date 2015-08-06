@@ -1,8 +1,8 @@
 #!/usr/bin/env python2
 import __builtin__
-import wx, sys, os
+import wx, cStringIO
 from direct.stdpy import threading
-
+import wx.lib.agw.aquabutton as AB
 
 #Start Aquas Injector
 def __inject_wx(_):
@@ -18,15 +18,21 @@ def openInjector_wx():
     frame = wx.Frame(None, title="Toontown: The Edge Injector", size=(640, 450), style=wx.SYSTEM_MENU | wx.CAPTION | wx.MINIMIZE_BOX | wx.FRAME_SHAPED)
     frame.Centre()
     panel = wx.Panel(frame)
-    button = wx.Button(parent=panel, id=-1, label="Inject", size=(550, 100), pos=(45, 312))
-    button.SetFont(wx.Font(16, wx.DECORATIVE, wx.NORMAL, wx.NORMAL))
-    clearbutton = wx.Button(parent=panel, id=-1, label="Clear\nBox", size=(40, 40), pos=(0, 312)) #my clear button
+    bitmap = wx.Bitmap("flowers3.png", wx.BITMAP_TYPE_PNG)
+    button = wx.Button(parent=panel, id=-1, label="Inject", size=(510, 90), pos=(65, 312))
+    button.SetFont(wx.Font(19, wx.DECORATIVE, wx.NORMAL, wx.NORMAL))
+    clearbutton = wx.Button(parent=panel, id=-1, label="Clear\nBox", size=(40, 40), pos=(10, 312)) #my clear button
     clearbutton.SetFont(wx.Font(7, wx.MODERN, wx.NORMAL, wx.NORMAL)) #my clear button
     textbox = wx.TextCtrl(parent=panel, id=-1, pos=(20, 0), size=(600, 310), style=wx.TE_MULTILINE)
     frame.Bind(wx.EVT_BUTTON, __inject_wx, button)
     frame.Bind(wx.EVT_BUTTON, __clear_injector, clearbutton) #my clear button
     frame.Show()
-    app.SetTopWindow(frame)
+    imageFile = 'flowerbg.jpg'
+    data = open(imageFile, "rb").read()
+    stream = cStringIO.StringIO(data)
+    bmp = wx.BitmapFromImage(wx.ImageFromStream(stream))
+    wx.StaticBitmap(frame, -1, bmp, (0,0))
+    #app.SetTopWindow(frame)
     defaultText = ''
     textbox.AppendText(defaultText)
     threading.Thread(target=app.MainLoop).start()
