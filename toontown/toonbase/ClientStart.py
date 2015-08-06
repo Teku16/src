@@ -18,7 +18,6 @@ def openInjector_wx():
     frame = wx.Frame(None, title="Toontown: The Edge Injector", size=(640, 450), style=wx.SYSTEM_MENU | wx.CAPTION | wx.MINIMIZE_BOX | wx.FRAME_SHAPED)
     frame.Centre()
     panel = wx.Panel(frame)
-    bitmap = wx.Bitmap("flowers3.png", wx.BITMAP_TYPE_PNG)
     button = wx.Button(parent=panel, id=-1, label="Inject", size=(510, 90), pos=(65, 312))
     button.SetFont(wx.Font(19, wx.DECORATIVE, wx.NORMAL, wx.NORMAL))
     clearbutton = wx.Button(parent=panel, id=-1, label="Clear\nBox", size=(40, 40), pos=(10, 312)) #my clear button
