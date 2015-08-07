@@ -31,8 +31,6 @@ want-whitelist #f
 # Cashbot boss:
 want-resistance-toonup #t
 want-resistance-restock #t
-want-resistance-die #t
-want-resistance-dance #t
 
 # Optional:
 want-yin-yang #t
