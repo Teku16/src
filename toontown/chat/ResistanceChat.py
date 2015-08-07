@@ -30,6 +30,8 @@ if config.GetBool('want-resistance-money', True):
     allowedResistanceMessages.append(RESISTANCE_MONEY)
 if config.GetBool('want-resistance-dance', True):
     allowedResistanceMessages.append(RESISTANCE_DANCE)
+if config.GetBool('want-resistance-die', True):
+    allowedResistanceMessages.append(RESISTANCE_DIE)
 resistanceMenu = [
     RESISTANCE_TOONUP, RESISTANCE_RESTOCK, RESISTANCE_MONEY,
     RESISTANCE_DANCE, RESISTANCE_DIE

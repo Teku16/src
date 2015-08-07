@@ -31,11 +31,13 @@ want-whitelist #f
 # Cashbot boss:
 want-resistance-toonup #t
 want-resistance-restock #t
+want-resistance-die #t
+want-resistance-dance #t
 
 # Optional:
 want-yin-yang #t
 
 # Developer options:
 show-population #t
-force-skip-tutorial #t
+force-skip-tutorial #f
 want-instant-parties #t

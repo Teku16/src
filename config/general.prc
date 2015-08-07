@@ -108,6 +108,7 @@ want-bossbot-headquarters #t
 want-resistance-toonup #f
 want-resistance-restock #f
 want-resistance-dance #f
+want-resistance-die #t
 
 # Cog battles:
 base-xp-multiplier 1.0
