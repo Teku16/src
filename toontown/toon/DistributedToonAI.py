@@ -4496,7 +4496,8 @@ def sos(count, name):
                 if name == 'reset':
                     invoker.d_setNPCFriendsDict([0])
                     return "Reset %s\'s SOS cards!" % invoker
-                continue
+                else:
+                    continue
             break
     else:
         return 'SOS card %s was not found!' % name
