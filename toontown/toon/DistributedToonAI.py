@@ -4483,11 +4483,14 @@ def unlocks():
     return 'Unlocked teleport access, emotions, and pet trick phrases!'
 
 @magicWord(category=CATEGORY_PROGRAMMER, types=[int, str])
-def sos(count, name):
+def sos(count, name, reset=0):
     """
     Modifies the invoker's specified SOS card count.
     """
     invoker = spellbook.getInvoker()
+    if reset == True:
+        invoker.d_setNPCFriendsDict([0])
+        return "Reset %s\'s SOS cards!" % invoker
     if not 0 <= count <= 100:
         return 'Your SOS count must be in range (0-100).'
     for npcId, npcName in TTLocalizer.NPCToonNames.items():
@@ -4495,9 +4498,6 @@ def sos(count, name):
             if npcId not in NPCToons.npcFriends:
                 continue
             break
-    if name == 'reset':
-        invoker.d_setNPCFriendsDict([0])
-        return "Reset %s\'s SOS cards!" % invoker
     else:
         return 'SOS card %s was not found!' % name
     if (count == 0) and (npcId in invoker.NPCFriendsDict):
