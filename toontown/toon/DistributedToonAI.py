@@ -4867,10 +4867,11 @@ def dna(part, value):
     if part == 'headcolor':
         if dna.gender not in ('m', 'f'):
             return 'Unknown gender.'
-        if (value == 0x1a) or (0x1a in (dna.headColor, dna.armColor, dna.legColor)):
-            return 'Toon contains black parts!'
-        if (value == 0x00) or (0x00 in (dna.headColor, dna.armColor, dna.legColor)):
-            return 'Toon contains white parts!'
+        #if (value == 0x1a) or (0x1a in (dna.headColor, dna.armColor, dna.legColor)):
+        #    return 'Toon contains black parts!'
+        #if (value == 0x00) or (0x00 in (dna.headColor, dna.armColor, dna.legColor)):
+        #    return 'Toon contains white parts!'
+        #    return 'Toon contains white parts!'
         if (dna.gender == 'm') and (value not in ToonDNA.defaultBoyColorList):
             return 'Invalid male head color index: ' + str(value)
         if (dna.gender == 'f') and (value not in ToonDNA.defaultGirlColorList):
@@ -4882,10 +4883,10 @@ def dna(part, value):
     if part == 'armcolor':
         if dna.gender not in ('m', 'f'):
             return 'Unknown gender.'
-        if (value == 0x1a) or (0x1a in (dna.headColor, dna.armColor, dna.legColor)):
-            return 'Toon contains black parts!'
-        if (value == 0x00) or (0x00 in (dna.headColor, dna.armColor, dna.legColor)):
-            return 'Toon contains white parts!'
+        #if (value == 0x1a) or (0x1a in (dna.headColor, dna.armColor, dna.legColor)):
+        #    return 'Toon contains black parts!'
+        #if (value == 0x00) or (0x00 in (dna.headColor, dna.armColor, dna.legColor)):
+        #    return 'Toon contains white parts!'
         if (dna.gender == 'm') and (value not in ToonDNA.defaultBoyColorList):
             return 'Invalid male arm color index: ' + str(value)
         if (dna.gender == 'f') and (value not in ToonDNA.defaultGirlColorList):
