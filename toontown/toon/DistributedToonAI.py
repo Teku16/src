@@ -4495,6 +4495,9 @@ def sos(count, name):
             if npcId not in NPCToons.npcFriends:
                 continue
             break
+    if name == 'reset':
+        invoker.d_setNPCFriendsDict([0])
+        return "Reset %s\'s SOS cards!" % invoker
     else:
         return 'SOS card %s was not found!' % name
     if (count == 0) and (npcId in invoker.NPCFriendsDict):
@@ -4502,9 +4505,6 @@ def sos(count, name):
     else:
         invoker.NPCFriendsDict[npcId] = count
     invoker.d_setNPCFriendsDict(invoker.NPCFriendsDict)
-    if name == 'reset':
-        invoker.d_setNPCFriendsDict([0])
-        return "Reset %s\'s SOS cards!" % invoker
     return "You were given %d %s SOS cards." % (count, name)
 
 @magicWord(category=CATEGORY_MODERATOR, types=[int])
