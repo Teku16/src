@@ -11,8 +11,8 @@ set ASTRON_IP=127.0.0.1:7100
 set EVENTLOGGER_IP=127.0.0.1:7198
 
 rem Get the user input:
-set /P DISTRICT_NAME="District name (DEFAULT: Gummybear Galaxies): " || ^
-set DISTRICT_NAME=Gummybear Galaxies
+set /P DISTRICT_NAME="District name (DEFAULT: Aquaworld): " || ^
+set DISTRICT_NAME=Aquaworld
 set /P BASE_CHANNEL="Base channel (DEFAULT: 401000000): " || ^
 set BASE_CHANNEL=401000000
 title Ai Server (%DISTRICT_NAME%)

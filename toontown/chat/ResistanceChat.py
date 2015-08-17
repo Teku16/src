@@ -20,6 +20,7 @@ RESISTANCE_TOONUP = 0
 RESISTANCE_RESTOCK = 1
 RESISTANCE_MONEY = 2
 RESISTANCE_DANCE = 3
+RESISTANCE_DIE = 4
 allowedResistanceMessages = []
 if config.GetBool('want-resistance-toonup', True):
     allowedResistanceMessages.append(RESISTANCE_TOONUP)
@@ -29,9 +30,11 @@ if config.GetBool('want-resistance-money', True):
     allowedResistanceMessages.append(RESISTANCE_MONEY)
 if config.GetBool('want-resistance-dance', True):
     allowedResistanceMessages.append(RESISTANCE_DANCE)
+if config.GetBool('want-resistance-die', True):
+    allowedResistanceMessages.append(RESISTANCE_DIE)
 resistanceMenu = [
     RESISTANCE_TOONUP, RESISTANCE_RESTOCK, RESISTANCE_MONEY,
-    RESISTANCE_DANCE
+    RESISTANCE_DANCE, RESISTANCE_DIE
 ]
 resistanceDict = {
     RESISTANCE_TOONUP: {
@@ -79,6 +82,13 @@ resistanceDict = {
         'itemText': TTLocalizer.ResistanceDanceItem,
         'chatText': TTLocalizer.ResistanceDanceChat,
         'values': ['Dance'],
+        'items': [0]
+    },
+    RESISTANCE_DIE: {
+        'menuName': TTLocalizer.ResistanceDieMenu,
+        'itemText': TTLocalizer.ResistanceDieItem,
+        'chatText': TTLocalizer.ResistanceDieChat,
+        'values': ['Go Sad'],
         'items': [0]
     }
 }
@@ -210,6 +220,13 @@ def doEffect(textId, speakingToon, nearbyToons):
             toon = base.cr.doId2do.get(toonId)
             if toon and (not toon.ghostMode):
                 toon.setAnimState('victory')
+    elif menuIndex == RESISTANCE_DIE:
+        effect = BattleParticles.loadParticleFile('resistanceEffectSparkle.ptf')
+        fadeColor = VBase4(1, 0.5, 1, 1)
+        for toonId in nearbyToons:
+            toon = base.cr.doId2do.get(toonId)
+            if toon and (not toon.ghostMode):
+                toon.setAnimState('Sad')
     else:
         return
     recolorToons = Parallel()

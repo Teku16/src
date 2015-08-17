@@ -281,7 +281,8 @@ scStructure = [
   1606],
  {1: 17},
  {2: 18},
- 3]
+ 3,
+ {4: 22}]
 if hasattr(base, 'wantPets'):
     scPetMenuStructure = base.wantPets and [[OTPLocalizer.SCMenuPets,
       [TTSCPetTrickMenu, OTPLocalizer.SCMenuPetTricks],
