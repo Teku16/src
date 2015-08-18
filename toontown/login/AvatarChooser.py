@@ -217,8 +217,8 @@ class AvatarChooser(StateData.StateData):
             panel.destroy()
 
         del self.panelList
-        self.title.removeNode()
-        del self.title
+       # self.title.removeNode()
+       # del self.title
         self.quitButton.destroy()
         del self.quitButton
         self.logoutButton.destroy()
