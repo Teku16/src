@@ -10,6 +10,7 @@ from pandac.PandaModules import *
 from toontown.toonbase import TTLocalizer
 from direct.directnotify import DirectNotifyGlobal
 from direct.interval.IntervalGlobal import *
+from direct.interval.IntervalGlobal import *
 import random
 MAX_AVATARS = 6
 POSITIONS = (Vec3(-0.860167, 0, 0.359333),
@@ -87,6 +88,14 @@ class AvatarChooser(StateData.StateData):
         self.pickAToonBG.setScale(1.5, 1, 2)
         self.title = OnscreenText(TTLocalizer.AvatarChooserPickAToon, scale=TTLocalizer.ACtitle, parent=hidden, font=ToontownGlobals.getSignFont(), fg=(1, 0.9, 0.1, 1), pos=(0.0, 0.82))
         self.title.flattenStrong()
+        def titleLerp1():
+            LerpHprInterval(self.title, 2, (360, 0, 0), (0,0,0)).start()
+        def titleSeq():
+            seq = Sequence()
+            seq.append(Func(titleLerp1))
+            seq.append(Wait(8))
+            seq.loop()
+        titleSeq()
         quitHover = gui.find('**/QuitBtn_RLVR')
         self.quitButton = DirectButton(image=(quitHover, quitHover, quitHover), relief=None, text=TTLocalizer.AvatarChooserQuit, text_font=ToontownGlobals.getSignFont(), text_fg=(0.977, 0.816, 0.133, 1), text_pos=TTLocalizer.ACquitButtonPos, text_scale=TTLocalizer.ACquitButton, image_scale=1, image1_scale=1.05, image2_scale=1.05, scale=1.05, pos=(-0.25, 0, 0.075), command=self.__handleQuit)
         self.quitButton.flattenMedium()
