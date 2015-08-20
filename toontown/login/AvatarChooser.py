@@ -10,7 +10,6 @@ from pandac.PandaModules import *
 from toontown.toonbase import TTLocalizer
 from direct.directnotify import DirectNotifyGlobal
 from direct.interval.IntervalGlobal import *
-from direct.interval.IntervalGlobal import *
 import random
 MAX_AVATARS = 6
 POSITIONS = (Vec3(-0.860167, 0, 0.359333),
@@ -217,8 +216,8 @@ class AvatarChooser(StateData.StateData):
             panel.destroy()
 
         del self.panelList
-       # self.title.removeNode()
-       # del self.title
+        #self.title.removeNode()
+        #del self.title
         self.quitButton.destroy()
         del self.quitButton
         self.logoutButton.destroy()
