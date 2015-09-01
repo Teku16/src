@@ -34,8 +34,10 @@ want-resistance-restock #t
 
 # Optional:
 want-yin-yang #t
+use-libpandadna #f
+libpandadna-pyreader #f
 
 # Developer options:
 show-population #t
-force-skip-tutorial #t
+force-skip-tutorial #f
 want-instant-parties #t

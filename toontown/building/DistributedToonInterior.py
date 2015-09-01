@@ -211,3 +211,6 @@ class DistributedToonInterior(DistributedObject.DistributedObject):
 
     def exitBeingTakenOver(self):
         pass
+        
+    def removeToonInt(self):
+        self.interior.removeNode()
