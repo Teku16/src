@@ -12,13 +12,13 @@ def getLanguage():
     return language
 
 
-print 'OTPLocalizer: Running in language: %s' % language
+#print 'OTPLocalizer: Running in language: %s' % language
 if language == 'english':
     _languageModule = 'otp.otpbase.OTPLocalizer' + language.capitalize()
 else:
     checkLanguage = 1
     _languageModule = 'otp.otpbase.OTPLocalizer_' + language
-print 'from ' + _languageModule + ' import *'
+#print 'from ' + _languageModule + ' import *'
 from otp.otpbase.OTPLocalizerEnglish import *
 if checkLanguage:
     l = {}

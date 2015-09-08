@@ -255,7 +255,7 @@ class DistributedToonInterior(DistributedObject.DistributedObject):
                 bldg.interior.find('**/door').removeNode()
                 bldg.interior.find('**/arch2').removeNode()
                 bldg.interior.find('**/random_tc2_TI_floor').removeNode()
-            
+                bldg.interior.find('**/npc_origin_0').setPos(10.5,14.222,-1.7)
             #move npc to behind counter, if it ever works
             stuff = base.cr.doFindAll('render/toon')
             for stuff in base.cr.doFindAll('render/toon'):
@@ -380,7 +380,6 @@ class DistributedToonInterior(DistributedObject.DistributedObject):
             self.stripper.setDNAString('t\x01\x07\x00\x00\x29\x1b\x1e\x1b\x25\x1b\x24\x1a\x24\x24')
             #stripper.displayTalk('Welcome to the Snooze Bar!')
             self.stripper.loop('swing')
-
         else:
             try:
                 p.removeNode()
@@ -399,7 +398,6 @@ class DistributedToonInterior(DistributedObject.DistributedObject):
                 self.mug.removeNode()
             except:
                 pass
-            base.localAvatar.setSystemMessage(0, "You aren't in the Snooze Bar! D:")
 
     def setZoneIdAndBlock(self, zoneId, block):
         self.zoneId = zoneId

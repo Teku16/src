@@ -180,7 +180,7 @@ TorsoDict = {
 def loadModels():
     global Preloaded
     if not Preloaded:
-        print 'Preloading avatars...'
+        print 'Preloading Toons & their parts...'
 
         for key in LegDict.keys():
             fileRoot = LegDict[key]

@@ -8,7 +8,7 @@ notify = directNotify.newCategory('SkyUtil')
 def cloudSkyTrack(task):
     task.h += globalClock.getDt() * 0.25
     if task.cloud1.isEmpty() or task.cloud2.isEmpty():
-        notify.warning("Couln't find clouds!")
+        #notify.warning("Couln't find clouds!")
         return Task.done
 
     task.cloud1.setH(task.h)

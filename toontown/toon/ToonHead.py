@@ -53,7 +53,7 @@ PreloadHeads = {}
 def preloadToonHeads():
     global PreloadHeads
     if not PreloadHeads:
-        print 'Preloading Toon heads...'
+        #print 'Preloading Toon heads...'
         for key in HeadDict.keys():
             fileRoot = HeadDict[key]
 
@@ -589,7 +589,7 @@ class ToonHead(Actor.Actor):
             mode = -2
         if self.hasLOD():
             for lodName in self.getLODNames():
-                self.drawInFront('eyes*', 'head-front*', mode, lodName=lodName)
+                self.drawInFront('eyes*', 'head*', mode, lodName=lodName)
                 if base.config.GetBool('want-new-anims', 1):
                     if not self.find('**/joint_pupil*').isEmpty():
                         self.drawInFront('joint_pupil*', 'eyes*', -1, lodName=lodName)
@@ -630,7 +630,7 @@ class ToonHead(Actor.Actor):
                     self.__lod250lPupil = self.__lod250Eyes.find('**/joint_pupilL*')
                     self.__lod250rPupil = self.__lod250Eyes.find('**/joint_pupilR*')
         else:
-            self.drawInFront('eyes*', 'head-front*', mode)
+            self.drawInFront('eyes*', 'head*', mode)
             if base.config.GetBool('want-new-anims', 1):
                 if not self.find('joint_pupil*').isEmpty():
                     self.drawInFront('joint_pupil*', 'eyes*', -1)

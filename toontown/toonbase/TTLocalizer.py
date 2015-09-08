@@ -12,13 +12,13 @@ def getLanguage():
     return language
 
 
-print 'TTLocalizer: Running in language: %s' % language
+print 'TTLocalizer: Running in language: English'
 if language == 'english':
     _languageModule = 'toontown.toonbase.TTLocalizer' + language.capitalize()
 else:
     checkLanguage = 1
     _languageModule = 'toontown.toonbase.TTLocalizer_' + language
-print 'from ' + _languageModule + ' import *'
+#print 'from ' + _languageModule + ' import *'
 from toontown.toonbase.TTLocalizerEnglish import *
 if checkLanguage:
     l = {}

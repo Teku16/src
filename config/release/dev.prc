@@ -21,7 +21,7 @@ dc-file astron/dclass/otp.dc
 
 # Core features:
 want-pets #f
-want-parties #t
+want-parties #f
 want-cogdominiums #f
 want-achievements #f
 
@@ -40,4 +40,4 @@ libpandadna-pyreader #f
 # Developer options:
 show-population #t
 force-skip-tutorial #f
-want-instant-parties #t
+want-instant-parties #f

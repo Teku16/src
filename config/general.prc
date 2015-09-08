@@ -74,7 +74,7 @@ want-golf-zone #t
 
 # Safe zone settings:
 want-treasure-planners #t
-want-suit-planners #t
+want-suit-planners #f
 want-butterflies #t
 
 # Classic characters:

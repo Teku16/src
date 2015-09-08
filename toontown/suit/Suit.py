@@ -185,7 +185,7 @@ Preloaded = {}
 def loadModels():
     global Preloaded
     if not Preloaded:
-        print 'Preloading suits...'
+        #print 'Preloading suits...'
         for filepath in SuitParts:
             Preloaded[filepath] = loader.loadModel(filepath)
             Preloaded[filepath].flattenMedium()

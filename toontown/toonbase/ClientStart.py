@@ -70,7 +70,7 @@ from otp.settings.Settings import Settings
 
 preferencesFilename = ConfigVariableString(
     'preferences-filename', 'preferences.json').getValue()
-notify.info('Reading %s...' % preferencesFilename)
+#notify.info('Reading %s...' % preferencesFilename)
 __builtin__.settings = Settings(preferencesFilename)
 if 'fullscreen' not in settings:
     settings['fullscreen'] = False
@@ -126,7 +126,7 @@ except:
     __builtin__.launcher = launcher
 
 
-notify.info('Starting the game...')
+notify.info('Starting the game...Setting the default font...')
 if launcher.isDummy():
     http = HTTPClient()
 else:
@@ -135,7 +135,7 @@ tempLoader = Loader()
 backgroundNode = tempLoader.loadSync(Filename('phase_3/models/gui/loading-background'))
 from direct.gui import DirectGuiGlobals
 from direct.gui.DirectGui import *
-notify.info('Setting the default font...')
+#notify.info('Setting the default font...')
 import ToontownGlobals
 DirectGuiGlobals.setDefaultFontFunc(ToontownGlobals.getInterfaceFont)
 launcher.setPandaErrorCode(7)
@@ -173,7 +173,7 @@ if base.musicManagerIsValid:
         music.setLoop(1)
         music.setVolume(0.9)
         music.play()
-    notify.info('Loading the default GUI sounds...')
+    #notify.info('Loading the default GUI sounds...')
     DirectGuiGlobals.setDefaultRolloverSound(base.loadSfx('phase_3/audio/sfx/GUI_rollover.ogg'))
     DirectGuiGlobals.setDefaultClickSound(base.loadSfx('phase_3/audio/sfx/GUI_create_toon_fwd.ogg'))
 else:
@@ -213,10 +213,9 @@ del version
 base.loader = base.loader
 __builtin__.loader = base.loader
 autoRun = ConfigVariableBool('toontown-auto-run', 1)
-#Injector
-print("======================================")
-print("TTE has loaded! Starting the Injector!")
-print("======================================")
+#injector
+print('==============================================')
+print('ClientStart: TTE has loaded w/ the Injector...')
 openInjector_wx()
 if autoRun:
     try:
