@@ -255,7 +255,7 @@ class DistributedToonInterior(DistributedObject.DistributedObject):
                 bldg.interior.find('**/door').removeNode()
                 bldg.interior.find('**/arch2').removeNode()
                 bldg.interior.find('**/random_tc2_TI_floor').removeNode()
-                bldg.interior.find('**/npc_origin_0').setPos(10.5,14.222,-1.7)
+                bldg.interior.find('**/npc_origin_0').setPos(3.193,  19.597,  0.025) #susan's pos
             #move npc to behind counter, if it ever works
             stuff = base.cr.doFindAll('render/toon')
             for stuff in base.cr.doFindAll('render/toon'):
