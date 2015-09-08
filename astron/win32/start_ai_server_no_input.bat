@@ -11,11 +11,11 @@ set ASTRON_IP=127.0.0.1:7100
 set EVENTLOGGER_IP=127.0.0.1:7198
 
 rem no user input!:
-set DISTRICT_NAME=Nuttyboro
+set DISTRICT_NAME=Aquaworld
 set BASE_CHANNEL=401000000
-
+title Ai Server (%DISTRICT_NAME%)
 echo ===============================
-echo Starting Toontown Fellowship AI server...
+echo Starting Toontown Edge AI server...
 echo ppython: %PPYTHON_PATH%
 echo District name: %DISTRICT_NAME%
 echo Base channel: %BASE_CHANNEL%

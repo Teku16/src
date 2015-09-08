@@ -17,7 +17,7 @@ set /P BASE_CHANNEL="Base channel (DEFAULT: 401000000): " || ^
 set BASE_CHANNEL=401000000
 title Ai Server (%DISTRICT_NAME%)
 echo ===============================
-echo Starting Toontown: The Edge server...
+echo Starting Toontown Edge server...
 echo ppython: %PPYTHON_PATH%
 echo District name: %DISTRICT_NAME%
 echo Base channel: %BASE_CHANNEL%

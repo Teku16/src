@@ -1,5 +1,5 @@
 @echo off
-title Toontown: The Edge Console
+title Toontown Edge Console
 cd ..
 
 rem Read the contents of PPYTHON_PATH into %PPYTHON_PATH%:
@@ -14,8 +14,8 @@ set TTI_PLAYCOOKIE=%ttiUsername%
 set TTI_GAMESERVER=127.0.0.1
 
 echo ===============================
-echo Starting Toontown: The Edge...
-echo ppython: %PPYTHON_PATH%
+echo Starting Toontown Edge...
+rem echo ppython: %PPYTHON_PATH%
 echo Username: %ttiUsername%
 echo Gameserver: %TTI_GAMESERVER%
 echo ===============================

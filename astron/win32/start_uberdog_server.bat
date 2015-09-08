@@ -15,7 +15,7 @@ rem set /P BASE_CHANNEL="Base channel (DEFAULT: 1000000): " || ^
 set BASE_CHANNEL=1000000
 
 echo ===============================
-echo Starting Toontown:The Edge UberDOG Server
+echo Starting Toontown Edge UberDOG Server
 echo ppython: %PPYTHON_PATH%
 echo Base channel: %BASE_CHANNEL%
 echo Max channels: %MAX_CHANNELS%
