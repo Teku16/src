@@ -34,4 +34,5 @@ def startCloudSky(hood, parent=camera, effects=CompassEffect.PRot | CompassEffec
     if not skyTrackTask.cloud1.isEmpty() and not skyTrackTask.cloud2.isEmpty():
         taskMgr.add(skyTrackTask, 'skyTrack')
     else:
-        notify.warning("Couln't find clouds!")
+        pass
+        #notify.warning("Couln't find clouds!")

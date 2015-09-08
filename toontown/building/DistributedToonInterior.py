@@ -255,13 +255,15 @@ class DistributedToonInterior(DistributedObject.DistributedObject):
                 bldg.interior.find('**/door').removeNode()
                 bldg.interior.find('**/arch2').removeNode()
                 bldg.interior.find('**/random_tc2_TI_floor').removeNode()
-                bldg.interior.find('**/npc_origin_0').setPos(3.193,  19.597,  0.025) #susan's pos
+                bldg.interior.find('**/door_double_round_ur_flat').setX(0.68)
+                bldg.interior.find('**/npc_origin_0').setPos(2.5,  19.597,  0.525)
+                bldg.interior.find('**/npc_origin_0').setHpr(175,0,0)
             #move npc to behind counter, if it ever works
-            stuff = base.cr.doFindAll('render/toon')
-            for stuff in base.cr.doFindAll('render/toon'):
-                stuff.setPos(10.5,  14.222,  -1.7)
-                stuff.setScale(1.4)
-                stuff.setHpr(90,0,0)
+            # stuff = base.cr.doFindAll('render/toon')
+            # for stuff in base.cr.doFindAll('render/toon'):
+                # stuff.setPos(10.5,  14.222,  -1.7)
+                # stuff.setScale(1.4)
+                # stuff.setHpr(90,0,0)
                 
             def talk0():
                 name = base.localAvatar.getName()
