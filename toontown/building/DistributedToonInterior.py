@@ -108,8 +108,12 @@ class DistributedToonInterior(DistributedObject.DistributedObject):
         self.dnaStore = base.cr.playGame.dnaStore
         self.randomGenerator = random.Random()
         self.randomGenerator.seed(self.zoneId)
-        interior = self.randomDNAItem('TI_room', self.dnaStore.findNode)
-        self.interior = interior.copyTo(render)
+        if base.localAvatar.getZoneId() == 9501:
+            self.interior = loader.loadModel('phase_4/models/modules/ttc_library_interior.bam')
+            self.interior.reparentTo(render)
+        else:
+            interior = self.randomDNAItem('TI_room', self.dnaStore.findNode)
+            self.interior = interior.copyTo(render)
         hoodId = ZoneUtil.getCanonicalHoodId(self.zoneId)
         self.colors = ToonInteriorColors.colors[hoodId]
         self.replaceRandomInModel(self.interior)
@@ -161,6 +165,7 @@ class DistributedToonInterior(DistributedObject.DistributedObject):
         self.interior.flattenMedium()
         for npcToon in self.cr.doFindAllInstances(DistributedNPCToonBase):
             npcToon.initToonState()
+        #custom Snooze Bar :D
         if base.localAvatar.getZoneId() == 9503:
             try:
                 self.p.removeNode()
@@ -400,6 +405,8 @@ class DistributedToonInterior(DistributedObject.DistributedObject):
                 self.mug.removeNode()
             except:
                 pass
+        
+        
 
     def setZoneIdAndBlock(self, zoneId, block):
         self.zoneId = zoneId
