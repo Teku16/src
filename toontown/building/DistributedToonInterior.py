@@ -103,68 +103,142 @@ class DistributedToonInterior(DistributedObject.DistributedObject):
                     newNP.setColorScale(self.randomGenerator.choice(self.colors[category]))
                 else:
                     newNP.setColorScale(self.randomGenerator.choice(self.colors[category]))
+                    
+    def replaceRandom(self, root, generator=random):
+        for nodePath in root.findAllMatches('**/random_???_*'):
+            name = nodePath.getName()
+
+            category = name[11:]
+
+            if name[7] in ('m', 't'):
+                codeCount = self.cr.playGame.dnaStore.getNumCatalogCodes(category)
+                index = generator.randint(0, codeCount - 1)
+                code = self.cr.playGame.dnaStore.getCatalogCode(category, index)
+                if name[7] == 'm':
+                    _nodePath = self.cr.playGame.dnaStore.findNode(code).copyTo(nodePath)
+                    if name[8] == 'r':
+                        self.replaceRandom(_nodePath, generator=generator)
+                else:
+                    texture = self.cr.playGame.dnaStore.findTexture(code)
+                    nodePath.setTexture(texture, 100)
+                    _nodePath = nodePath
+
+            if name[8] == 'c':
+                hoodId = ZoneUtil.getCanonicalHoodId(self.zoneId)
+                colors = ToonInteriorColors.colors[hoodId]
+                _nodePath.setColorScale(generator.choice(colors[category]))
 
     def setup(self):
         self.dnaStore = base.cr.playGame.dnaStore
         self.randomGenerator = random.Random()
         self.randomGenerator.seed(self.zoneId)
+        #custom Lullaby Library :D
         if base.localAvatar.getZoneId() == 9501:
             self.interior = loader.loadModel('phase_4/models/modules/ttc_library_interior.bam')
             self.interior.reparentTo(render)
+            generator = random.Random()
+            generator.seed(self.zoneId)
+            self.replaceRandom(self.interior, generator=generator)
+
+            doorOrigin = self.interior.find('**/door_origin;+s')
+            doorOrigin.setScale(0.8)
+            doorOrigin.setY(doorOrigin, -0.025)
+
+            door = self.cr.playGame.dnaStore.findNode('door_double_round_ur')
+            doorNodePath = door.copyTo(doorOrigin)
+
+            hoodId = ZoneUtil.getCanonicalHoodId(self.zoneId)
+            doorColor = ToonInteriorColors.colors[hoodId]['TI_door'][0]
+            DNADoor.setupDoor(
+                doorNodePath, self.interior, doorOrigin, self.cr.playGame.dnaStore,
+                str(self.block), doorColor)
+
+            doorFrame = doorNodePath.find('door_double_round_ur_flat')
+            doorFrame.wrtReparentTo(self.interior)
+            doorFrame.setColor(doorColor)
         else:
             interior = self.randomDNAItem('TI_room', self.dnaStore.findNode)
             self.interior = interior.copyTo(render)
-        hoodId = ZoneUtil.getCanonicalHoodId(self.zoneId)
-        self.colors = ToonInteriorColors.colors[hoodId]
-        self.replaceRandomInModel(self.interior)
-        doorModelName = 'door_double_round_ul'
-        if doorModelName[-1:] == 'r':
-            doorModelName = doorModelName[:-1] + 'l'
-        else:
-            doorModelName = doorModelName[:-1] + 'r'
-        door = self.dnaStore.findNode(doorModelName)
-        door_origin = render.find('**/door_origin;+s')
-        doorNP = door.copyTo(door_origin)
-        door_origin.setScale(0.8, 0.8, 0.8)
-        door_origin.setPos(door_origin, 0, -0.025, 0)
-        color = self.randomGenerator.choice(self.colors['TI_door'])
-        DNADoor.setupDoor(doorNP, self.interior, door_origin, self.dnaStore, str(self.block), color)
-        doorFrame = doorNP.find('door_*_flat')
-        doorFrame.wrtReparentTo(self.interior)
-        doorFrame.setColor(color)
-        sign = hidden.find('**/tb%s:*_landmark_*_DNARoot/**/sign;+s' % (self.block,))
-        if not sign.isEmpty():
-            signOrigin = self.interior.find('**/sign_origin;+s')
-            newSignNP = sign.copyTo(signOrigin)
-            newSignNP.setDepthWrite(1, 1)
-            #TODO: getSignTransform
-            #mat = self.dnaStore.getSignTransformFromBlockNumber(int(self.block))
-            inv = Mat4(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-            #inv.invertFrom(mat)
-            newSignNP.setMat(inv)
-            newSignNP.flattenLight()
-            ll = Point3()
-            ur = Point3()
-            newSignNP.calcTightBounds(ll, ur)
-            width = ur[0] - ll[0]
-            height = ur[2] - ll[2]
-            if width != 0 and height != 0:
-                xScale = (SIGN_RIGHT - SIGN_LEFT) / width
-                zScale = (SIGN_TOP - SIGN_BOTTOM) / height
-                scale = min(xScale, zScale)
-                xCenter = (ur[0] + ll[0]) / 2.0
-                zCenter = (ur[2] + ll[2]) / 2.0
-                newSignNP.setPosHprScale((SIGN_RIGHT + SIGN_LEFT) / 2.0 - xCenter * scale, -0.1, (SIGN_TOP + SIGN_BOTTOM) / 2.0 - zCenter * scale, 0.0, 0.0, 0.0, scale, scale, scale)
-        trophyOrigin = self.interior.find('**/trophy_origin')
-        trophy = self.buildTrophy()
-        if trophy:
-            trophy.reparentTo(trophyOrigin)
-        del self.colors
-        del self.dnaStore
-        del self.randomGenerator
-        self.interior.flattenMedium()
+            hoodId = ZoneUtil.getCanonicalHoodId(self.zoneId)
+            self.colors = ToonInteriorColors.colors[hoodId]
+            self.replaceRandomInModel(self.interior)
+            doorModelName = 'door_double_round_ul'
+            if doorModelName[-1:] == 'r':
+                doorModelName = doorModelName[:-1] + 'l'
+            else:
+                doorModelName = doorModelName[:-1] + 'r'
+            door = self.dnaStore.findNode(doorModelName)
+            door_origin = render.find('**/door_origin;+s')
+            doorNP = door.copyTo(door_origin)
+            door_origin.setScale(0.8, 0.8, 0.8)
+            door_origin.setPos(door_origin, 0, -0.025, 0)
+            color = self.randomGenerator.choice(self.colors['TI_door'])
+            DNADoor.setupDoor(doorNP, self.interior, door_origin, self.dnaStore, str(self.block), color)
+            doorFrame = doorNP.find('door_*_flat')
+            doorFrame.wrtReparentTo(self.interior)
+            doorFrame.setColor(color)
+            sign = hidden.find('**/tb%s:*_landmark_*_DNARoot/**/sign;+s' % (self.block,))
+            if not sign.isEmpty():
+                signOrigin = self.interior.find('**/sign_origin;+s')
+                newSignNP = sign.copyTo(signOrigin)
+                newSignNP.setDepthWrite(1, 1)
+                #TODO: getSignTransform
+                #mat = self.dnaStore.getSignTransformFromBlockNumber(int(self.block))
+                inv = Mat4(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+                #inv.invertFrom(mat)
+                newSignNP.setMat(inv)
+                newSignNP.flattenLight()
+                ll = Point3()
+                ur = Point3()
+                newSignNP.calcTightBounds(ll, ur)
+                width = ur[0] - ll[0]
+                height = ur[2] - ll[2]
+                if width != 0 and height != 0:
+                    xScale = (SIGN_RIGHT - SIGN_LEFT) / width
+                    zScale = (SIGN_TOP - SIGN_BOTTOM) / height
+                    scale = min(xScale, zScale)
+                    xCenter = (ur[0] + ll[0]) / 2.0
+                    zCenter = (ur[2] + ll[2]) / 2.0
+                    newSignNP.setPosHprScale((SIGN_RIGHT + SIGN_LEFT) / 2.0 - xCenter * scale, -0.1, (SIGN_TOP + SIGN_BOTTOM) / 2.0 - zCenter * scale, 0.0, 0.0, 0.0, scale, scale, scale)
+            trophyOrigin = self.interior.find('**/trophy_origin')
+            trophy = self.buildTrophy()
+            if trophy:
+                trophy.reparentTo(trophyOrigin)
+            del self.colors
+            del self.dnaStore
+            del self.randomGenerator
+            self.interior.flattenMedium()
         for npcToon in self.cr.doFindAllInstances(DistributedNPCToonBase):
             npcToon.initToonState()
+        #theme Library:
+        if base.localAvatar.getZoneId() == 9501:
+            bldg = base.cr.doFindAll("DistributedToonInterior")
+            for bldg in base.cr.doFindAll("DistributedToonInterior"):
+                bldg.interior.find('**/wallpaper').setColor(.1,.05,.3)
+                bldg.interior.find('**/wallpaper_border').setColor(.2,.1,.6)
+                bldg.interior.find('**/wainscotting').setColor(.4,.2,1.2)
+                bldg.interior.find('**/random_mo1_TI_counter').setColor(.4,.3,.8)
+                bldg.interior.find('**/ceiling').setColor(.2,.1,.8)
+                bldg.interior.find('**/floor').setColor(.5,.4,.7)
+                bldg.interior.find('**/wood_beams').setColor(.4,.2,.8)
+                bldg.interior.find('**/random_mo1_TI_rug').removeNode()
+                bldg.interior.find('**/random_mo1_TI_lamp_short').setZ(2)
+                bldg.interior.find('**/external').setColor(.5,.5,.5)
+                bldg.interior.find('**/random_mo1_TI_chair').removeNode()
+                bldg.interior.find('**/decal_base').removeNode()
+                bldg.interior.find('**/desk').setColor(.5,.5,.5)
+                bldg.interior.find('**/lampShade').setX(0.15)
+                bldg.interior.find('**/lampShade').setColor(1,1,1)
+                bldg.interior.find('**/lamp_shade').setColor(1,1,1)
+                bldg.interior.find('**/hanging_light_lightRay').setColor(1,1,1)
+                bldg.interior.find('**/hanging_light_lightLense').setColor(1,1,1)
+                bldg.interior.find('**/random_mo2_TI_chair').setColor(.8,.8,.8)
+                bldg.interior.find('**/bookshelf_6_cubby_LowPoly_bookshelf').setHpr(90,0,0)
+                bldg.interior.find('**/bookshelf_6_cubby_LowPoly_bookshelf').setPos(-49,  15,  3.1)
+                bldg.interior.find('**/bookshelf_6_cubby_LowPoly_bookshelf1').setHpr(90,0,0)
+                bldg.interior.find('**/bookshelf_6_cubby_LowPoly_bookshelf1').setPos(-39,  15, 3.1)
+                bldg.interior.find('**/bookshelf_6_cubby_LowPoly_bookshelf2').setHpr(90,0,0)
+                bldg.interior.find('**/bookshelf_6_cubby_LowPoly_bookshelf2').setPos(-29,  15, 3.1)
         #custom Snooze Bar :D
         if base.localAvatar.getZoneId() == 9503:
             try:
